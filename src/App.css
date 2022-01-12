@@ -34,7 +34,7 @@ h1{
   align-items: center;
   min-height: 20rem;
   gap: 1rem;
-  width: 50%;
+  width: 33%;
   margin: 0 auto;
   border: 1px solid black;
   box-shadow: 1px 2px black;
@@ -56,11 +56,13 @@ input,button{
   background-color: transparent;
   color: white;
   text-align: center;
-  min-height: 2rem;
+  padding: 1rem;
 }
 
-button{
-  background-color: goldenrod;
-  min-width: 9rem; 
-  color: black;
+.button{
+  cursor: pointer;
+  border: 2px solid white;
+  padding: 1rem;
+  border-radius: 50px;
+
 }

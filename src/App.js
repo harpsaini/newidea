@@ -1,21 +1,32 @@
 
 import './App.css';
 import SignIn from './SignIn';
-import Register from './Register';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './Home'
+import Register from './Register'
+// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
 
-function App() {
+const App = () => {
+
+  const [route, setRoute]= useState("signin")
+
+  const handleRouteChange = (Route) => {
+    setRoute(Route)
+    console.log("routechanged");
+  }
+
   return (
     <div className="App">
-      <Router>
-        <header className="App-header">
-          <h1>NewIdea</h1>
-        </header>
-        <Routes>
-          <Route  exact path='/' element={<SignIn/>}/>
-          <Route  path='/register' element={<Register/>}/>
-        </Routes>
-      </Router>
+      <header className="App-header">
+        <h1>NewIdea</h1>
+      </header>
+      {
+        route === 'home'?
+        <Home/>:
+        (route === 'signin'?
+        <SignIn handleRouteChange={handleRouteChange}/>:
+        <Register handleRouteChange={handleRouteChange}/> )   
+      }
     </div>
   );
 }

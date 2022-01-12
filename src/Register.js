@@ -1,6 +1,6 @@
-import { useState } from "react";
+import {  useState } from "react";
 
-const Register = () => {
+const Register = ({handleRouteChange}) => {
 
   const [email, setEmail] = useState("")
   const [name, setName] = useState("")
@@ -9,10 +9,8 @@ const Register = () => {
   const handleNameChange = (e) =>{
     setName(e.target.value)
   }
-  console.log(email);
-
+ 
   const handleEmailChange = (e)=>{
-    // console.log(e.target.value );
     setEmail(e.target.value)
   }
 
@@ -20,29 +18,39 @@ const Register = () => {
     setPassword(e.target.value)
   }
 
-const handleSubmit = (e) => {
-  e.preventDefault()
-  setEmail("")
-  setName("")
-  setPassword("")
-}
+  const handleSubmit = (e) => {
+    // setregister
+    // Email("")
+    // setName("")
+    // setregisterPassword("")
 
-
-// we need to check if the information entered already exists
-  // if no, save the user information in the database and direct to login page
-  // if yes, throw an errow 
+      fetch('http://localhost:5000/register',{
+        method:'post',
+        headers : { 'Content-Type':'application/json'},
+        body: JSON.stringify({
+          name: name,
+          email:email,
+          password:password
+        })
+      })
+      .this(res=>res.JSON())
+      .then(user=>{
+        console.log(user);
+      })
+  }
 
 
   return(
     <div className="formElement"> 
-      <form onSubmit={handleSubmit}>
+      <h2>Register</h2>
+      <form>
         <label className="sr-only" htmlFor="Name">Name</label>
         <input type="text" placeholder="Name" value={name} id="Name" onChange={handleNameChange}/>
-        <label className="sr-only" htmlFor="Email">Email</label>
-        <input type="Email" placeholder="Email" value={email} id="Email" onChange={handleEmailChange}/>
-        <label className="sr-only" htmlFor="Password"></label>
-        <input type="password" placeholder="Password" value={password} id="Password" onChange={handlePasswordChange}/>
-        <button type="submit">Register</button>  
+        <label className="sr-only" htmlFor="email">Email</label>
+        <input type="email" placeholder="Email" value={email} id="Email" onChange={handleEmailChange}/>
+        <label className="sr-only" htmlFor="password"></label>
+        <input type="password" placeholder="password" value={password} id="password" onChange={handlePasswordChange}/>
+        <input type="submit" onSubmit={handleSubmit} onClick={()=>handleRouteChange('home')} value="sign in" />  
       </form>
     </div>
   )

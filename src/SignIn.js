@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { Link } from 'react-router-dom';
 
-
-const SignIn = () => {
+const SignIn = ({handleRouteChange}) => {
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -15,24 +13,23 @@ const SignIn = () => {
     setPassword(e.target.value)
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  }
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  // }
   
-
-
-
   return(
     <div className="formElement">
       <h2>Sign in</h2>
-      <form onSubmit={handleSubmit}>
+      <form>
         <label htmlFor="Email"></label>
         <input type="Email" placeholder="Email" id="Email" onChange={handleEmailChange}/>
         <label className="sr-only" htmlFor="Password"></label>
         <input type="password" placeholder="Password" id="Password" onChange={handlePasswordChange}/>
-        <button type="submit">Sign in</button>  
+        <input type="submit" value="Sign in" onClick={()=> handleRouteChange('home')}/>
       </form>
-      <Link to="/register">Register</Link>
+      <div>
+        <p className="button" onClick={()=>handleRouteChange('register')}>Register</p>
+      </div>
     </div>
   )
 }
